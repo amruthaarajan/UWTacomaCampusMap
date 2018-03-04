@@ -39,8 +39,7 @@
     <b>Start: </b>
     <input type="text" id="start" name="start" value="<%= request.getParameter("source") %>">
     <b>End: </b>
-    <input type="text" id="end" name="end" value="47.614272, -122.325268">
-    <%--<input type="text" id="end" name="end" value="<%= request.getParameter("destination") %>">--%>
+    <input type="text" id="end" name="end" value="<%= request.getParameter("destination") %>">
 </div>
 <div id="map"></div>
 <script>
