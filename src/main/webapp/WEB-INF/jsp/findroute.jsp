@@ -12,7 +12,7 @@
 <body>
 <form name="findroute" action="directions" method="GET">
 Source<input type="text" id="source" name="source">
-Destination<input type="text" id="destination" name="destination">
+Destination<input type="text" id="destination" name="destination"> <input type="button" value="Search Building" onclick="find()"/>
 <input type="submit" name="Find Routes"> 
 </form>
 <script>
@@ -66,7 +66,36 @@ Destination<input type="text" id="destination" name="destination">
       };
       navigator.geolocation.getCurrentPosition(successCallback,errorCallback,options);
 
-    </script>
+</script>
+<script language="javascript">
+    var xmlhttp;
+    function init() {
+        // put more code here in case you are concerned about browsers that do not provide XMLHttpRequest object directly
+        xmlhttp = new XMLHttpRequest();
+    }
+    function find() {
+        var destination = document.getElementById("destination");
+        var url = "http://localhost:8084/webservicedemo/resources/employee/" + destination.value;
+        xmlhttp.open('GET',url,true);
+        xmlhttp.send(null);
+        xmlhttp.onreadystatechange = function() {
+
+            if (xmlhttp.readyState == 4) {
+                if ( xmlhttp.status == 200) {
+                    var dest = eval( "" +  xmlhttp.responseText + "");
+                    if (dest > 0 ) {
+                        document.getElementById("destination").value=dest;
+                    }
+                    else {
+                        alert("Invalid Building name");
+                    }
+                }
+                else
+                    alert("Error ->" + xmlhttp.responseText);
+            }
+        };
+    }
+</script>
 </body>
 
 </html>
